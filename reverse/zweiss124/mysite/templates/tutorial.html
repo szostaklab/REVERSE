@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+    .header {
+    margin-top: 40px;
+    }
+    </style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Home</a>
+    <a href="/choose_rounds" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Analyze</a>
+    <a href="/help" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Help</a>
+    <a href="/tutorial" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Tutorial</a>
+    <a href="/resources" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Other Resources</a>
+    <a href="/contact" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Contact</a>
+
+  </div>
+</div>
+
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:100px style="margin-right:450px">
+
+  <div class="header">
+    <div class="w3-twothird w3-container">
+      <h1>TUTORIAL</h1>
+    </div>
+  </div>
+
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Demo Files</h1>
+      <p>The demo zip file contains 4 rounds from a previous in vitro selection. We will explore the capabilities of REVERSE in the tutorial by using these data.</p>
+    </div>
+    <br>
+    <div class="w3-third w3-container">
+    <br>
+      <a class="w3-border w3-padding-large w3-padding-32 w3-center" class="label label-primary" href=/static/tutorial_files.zip target="_blank"  style="margin-right: 5px;">Download Demo Files </a>
+
+    </div>
+
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Walkthrough</h1>
+        <p>1) Download the zip file containing Demo Files above.</p>
+        <p>2) Move the downloaded file to your Desktop and double-click to unzip the file.</p>
+        <p>3) From the REVERSE homepage, click Analyze in the navigation bar.</p>
+        <p>4) For STEP 1, enter '4' rounds, for STEP 2, click the circle next to Yes and enter '90' for the quality cutoff. For STEP 3, click on “10,000” sequences. For STEP 4, click on “UNDER 100MB”</p>
+        <p>4) Under Upload Round 1, select Choose File and navigate to the folder you downloaded. Click on the file called 'round1.fastq.zip' and click 'Upload'. Repeat uploading the files for rounds 2-4 and then click Finalize.</p>
+        <p>5) On the following screen, don't worry right now about downloading the high quality sequences. Skip to STEP 5a. Enter '32' in the first box and '71' in the second box (this is the region of interest for this experiment). For STEP 5b, click 'correct'. For STEP 5c, click 'Analyze All Individual Sequences'.</p>
+        <p>6) We are going to use 2 of the many tools in REVERSE. First, click 'Analyze' below Selection Statistics. This shows you the steps REVERSE uses and the raw results of your experiment.</p>
+        <p>7) Press the back button and then scroll down to 'Sequence Tracker', which identifies the most abundant sequences and finds their abundances in all previous rounds. This shows you the emergence dynamics of the most abundant sequences in the selection.</p>
+        <p>Now, you can explore the other tools in REVERSE. ENJOY!</div>
+    </div>
+<!-- END MAIN -->
+</div>
+
+
+</body>
+</html>
