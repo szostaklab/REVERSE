@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+</style>
+<body>
+
+<!-- Navbar -->
+
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Home</a>
+    <a href="/choose_rounds" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Analyze</a>
+    <a href="/help" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Help</a>
+    <a href="/tutorial" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Tutorial</a>
+    <a href="/resources" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Other Resources</a>
+    <a href="/contact" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Contact</a>
+
+  </div>
+</div>
+<div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+    <h1>Selection Statistics</h1><br>
+    <p STYLE="font-size:15px">Upload Times: {{times}}
+    <form action="/data_analysis" method="post">
+            <button class="btn btn-primary" type="submit">Back</button>
+        </form>
+
+
+    {% for round in rounds %}
+    <br>
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Round {{round+1}}: Selection Statistics</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Number of Total Sequences</td>
+            <td>{{all_lens[round][0]}}</td>
+        </tr>
+            <tr>
+            <td>Number of High Quality Sequences</td>
+            <td>{{all_lens[round][1]}}</td>
+        </tr>
+                <tr>
+            <td>Number of Unique Sequences</td>
+            <td>{{all_lens[round][2]}}</td>
+        </tr>
+            <tr>
+            <td>Fraction Unique Sequences</td>
+            <td>{{all_lens[round][3]}}</td>
+        </tr>
+    </tbody>
+    </table>
+
+
+    {% endfor %}
+
+    <br><br>
+        <button type="button" onclick="tableToCSV()">
+            Download CSV
+        </button>
+
+    <script type="text/javascript">
+        function tableToCSV() {
+
+            // Variable to store the final csv data
+            var csv_data = [];
+
+            // Get each row data
+            var rows = document.getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+
+                // Get each column data
+                var cols = rows[i].querySelectorAll('td,th');
+
+                // Stores each csv row data
+                var csvrow = [];
+                for (var j = 0; j < cols.length; j++) {
+
+                    // Get the text data of each cell
+                    // of a row and push it to csvrow
+                    csvrow.push(cols[j].innerHTML);
+                }
+
+                // Combine each column value with comma
+                csv_data.push(csvrow.join(","));
+            }
+
+            // Combine each row data with new line character
+            csv_data = csv_data.join('\n');
+
+            // Call this function to download csv file
+            downloadCSVFile(csv_data);
+
+        }
+
+        function downloadCSVFile(csv_data) {
+
+            // Create CSV file object and feed
+            // our csv_data into it
+            CSVFile = new Blob([csv_data], {
+                type: "text/csv"
+            });
+
+            // Create to temporary link to initiate
+            // download process
+            var temp_link = document.createElement('a');
+
+            // Download csv file
+            temp_link.download = "Selection_Statistics.csv";
+            var url = window.URL.createObjectURL(CSVFile);
+            temp_link.href = url;
+
+            // This link should not be displayed
+            temp_link.style.display = "none";
+            document.body.appendChild(temp_link);
+
+            // Automatically click the link to
+            // trigger download
+            temp_link.click();
+            document.body.removeChild(temp_link);
+        }
+    </script>
+
+      </div>
+</div>
+    </body>
+
+</html>
