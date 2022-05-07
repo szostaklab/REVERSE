@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- http://getbootstrap.com/docs/4.5/ -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link href="/static/styles.css" rel="stylesheet">
+        <!-- http://getbootstrap.com/docs/4.5/ -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <style>
+ .navbar .navbar-nav .nav-link {
+    color: #FFFFFF;
+    font-size: 1.5em;
+}
+.navbar .navbar-nav .nav-link:hover{
+    color: #808080;
+}
+@media only screen and (min-width: 960px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .navbar .navbar-nav {
+    border-bottom: 2px solid #000;
+  }
+  .navbar .nav-item {
+    padding: 0.5em 1em;
+  }
+}
+.navbar .navbar-nav {
+  margin-top: 0.5em;
+  border-top: 2px solid #000;
+}
+p {
+  font-size: 1.5em;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+h2 {
+  padding: 10px;
+  border: 5px solid gray;
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+    </style>
+ </head>
+
+
+<nav class="navbar navbar-expand-lg navbar-light"  style="background-color: #48546c;">
+    <a class="navbar-brand" href="#"><img src="/static/logo_outline.png" width="400"></a>
+    <p style="color: #bcbcc3" ;>Rapid Evaluation of Experimental RNA Selection/Evolution</p>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbarToggler13"
+        aria-controls="myNavbarToggler13" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="myNavbarToggler13">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/choose_rounds">Analyze</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/help">Help</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tutorial">Tutorial</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/resources">Other Resources</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<body>
+<script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+        </script>
+<div >
+    <div >
+        <br>
+        <h1 align = "center" >Analyze Sequence Clusters</h1>
+        <form action="/preview_back" method="post">
+            <button  class = "center" type="submit">Back</button>
+
+        </form>
+
+        {% if num_rounds == 1 %}
+        <h4 align = "center">Note: Showing limited functionality because only one round was uploaded (no dynamic analysis possible)</h4>
+        {% endif %}
+        <br>
+        <p align = "center" STYLE="font-size:15px">Run Times: {{times}}
+
+        <h2 >Cluster Peak Finder
+        <a STYLE="font-size:20px" href="" data-toggle="tooltip" title="This will output the most abundant cluster peak sequences from the final round (a larger input number will take longer to run).The maximum number of clusters is 50. ">ⓘ</a>
+       <!--
+        <div STYLE="font-size:25px" class="tooltip">?
+        <span class="tooltiptext">This will output the most abundant cluster peak sequences from the final round (a larger input number will take longer to run). The maximum number of clusters is 50. </span>
+        </div>
+        -->
+        <form STYLE= "font-size:25px" class="w3-row" style="text-align:left" action="/most_abundant_fams" method="post">
+	<input autocomplete="off" autofocus name="abund_fams" placeholder="Number of Clusters" type="numeric" min="1" max="20">
+	<input autocomplete="off" autofocus name="fam_abun" placeholder="Most Abundant Clusters" type="numeric" min="1" max="100">
+            <br>
+            <button STYLE= "font-size:25px" class="btn btn-primary" type="submit" class = "smaller" >Analyze</button>
+        </form>
+        </h2>
+
+
+        <h2 >Download Clustered Sequences
+        <a STYLE="font-size:20px" href="" data-toggle="tooltip" title="Given your input of the maximum Most Abundant Clusters, the optimal Most Abundant Clusters from each round will be calculated. It will generate a .CSV file with the sequences, their counts, and their assigned cluster. The maximum number of clusters is 50. ">ⓘ</a>
+
+       <!--
+        <div STYLE="font-size:25px" class="tooltip">?
+        <span class="tooltiptext">Given your input of the maximum Most Abundant Clusters, the optimal Most Abundant Clusters from the final round will be calculated. It will generate a .CSV file with the sequences, their counts, and their assigned cluster. The maximum number of clusters is 50. </span>
+        </div>
+        -->
+        <form STYLE= "font-size:25px" class="w3-row" style="text-align:left" action="/clustering" method="post">
+            <button STYLE= "font-size:25px" class="btn btn-primary" type="submit" class = "smaller" >Analyze</button>
+        </form>
+        </h2>
+
+        <br>
+
+        <h2 >Conservation Finder
+        <a STYLE="font-size:20px" href="" data-toggle="tooltip" title="This will generate a heatmap showing the distribution of nucleotides at each position. The maximum number of clusters is 50. ">ⓘ</a>
+
+       <!--
+        <div STYLE="font-size:25px" class="tooltip">?
+        <span class="tooltiptext">This will generate a heatmap showing the distribution of nucleotides at each position. The maximum number of clusters is 50. </span>
+        </div>
+        -->
+        <form STYLE= "font-size:25px" class="w3-row" style="text-align:left" action="/conserved" method="post">
+    <p STYLE="font-size:25px"> Which cluster do you want to analyze (e.g., 1 = the most abundant cluster)?</p>
+	<input autocomplete="off" autofocus name="rank" placeholder="Cluster Rank" type="numeric" min="1" max="10000">
+	<br>
+	<p STYLE="font-size:25px">Color scheme for heat map?</p>
+                <input STYLE="height:30px; width:30px" type="radio" name="hm_cmap" value="red"> Reds <br>
+                <input STYLE="height:30px; width:30px" type="radio" name="hm_cmap" value="blue"> Blues <br>
+                <input STYLE="height:30px; width:30px" type="radio" name="hm_cmap" value="bw"> Black+White <br>
+            <button STYLE= "font-size:25px" class="btn btn-primary" type="submit" class = "smaller" >Analyze</button>
+        </form>
+        </h2>
+        <br>
+
+        {% if num_rounds > 1 %}
+        <h2 >Cluster Peak Tracker
+
+        <a STYLE="font-size:20px" href="" data-toggle="tooltip" title="Generate figures that calculate the fraction abundance of each of the most common clusters in each round of selection. Use this to understand when enrichment occured and how much it varies by round. The maximum number of clusters is 50. ">ⓘ</a>
+
+       <!--
+        <div STYLE="font-size:25px" class="tooltip">?
+        <span class="tooltiptext">Generate figures that calculate the fraction abundance of each of the most common clusters in each round of selection. Use this to understand when enrichment occured and how much it varies by round. The maximum number of clusters is 50. </span>
+        </div>
+        -->
+        <form STYLE= "font-size:25px" class="w3-row" style="text-align:left" action="/track_fams" method="post">
+            <input autocomplete="off" autofocus name="to_track" placeholder="Clusters to Track" type="numeric" min="1" max="20">
+            <br>
+            <button STYLE= "font-size:25px" class="btn btn-primary" type="submit" class = "smaller" >Analyze</button>
+        </form>
+        {% endif %}
+        </h2>
+
+        <!--{% if num_rounds > 1 %}
+        <br>
+        <form  action="/seq_emergence" method="post">
+            <h2>Sequence Similarity Finder
+            <div STYLE="font-size:25px" class="tooltip">?
+                <span class="tooltiptext">Generate a heatmap that compares the top sequences in each round to each of the other rounds. This gives insight into when each of the most abundant sequences was selected for.</span>
+            </div>
+
+            <div class="form-group">
+                <input autocomplete="off" autofocus name="seq_emergence" placeholder="Number of Sequences" type="numeric" min="1" max="100">
+                <br>
+                <p>Color scheme for heat map?</p>
+                <input type="radio" name="se_cmap" value="red"> Reds <br>
+                <input type="radio" name="se_cmap" value="blue"> Blues <br>
+                <input type="radio" name="se_cmap" value="bw"> Black+White <br>
+
+            </div>
+            <br>
+            <button type="submit">Analyze</button class="btn btn-primary">
+            </h2>
+        </form>
+        {% endif %}-->
+
+<!--
+        <h2 >Sequence Motif Finder
+        <a STYLE="font-size:20px" href="" data-toggle="tooltip" title="Given a string of nucleotides that you want to track in your sequences through the rounds of selection (or the emergence of a known motif through evolution), this generates a figure with the string's fraction abundance in each round. Use A, C, G, T, R (purine), Y (pyrimidine), and N (any) only">ⓘ</a>
+
+        <form STYLE= "font-size:25px" class="w3-row" style="text-align:left" action="/region_emergence" method="post">
+            <input STYLE="font-size:20px" align="center" autocomplete="off" autofocus name="region_emergence" placeholder="Region" type="numeric" min="1" max="100">
+            <br>
+            <button STYLE= "font-size:25px" class="btn btn-primary" type="submit" class = "smaller" >Analyze</button>
+        </form>
+        </h2>
+
+
+        <h2 >Mutational Intermediates Finder
+        <a STYLE="font-size:20px" href="" data-toggle="tooltip" title="Given two sequences from the data, output all intermediates between them also in the data. Spaces are ok. Particularly useful for in vitro evolution experiments which evolve one phenotype to another. Determine the evolutionary trajectory connecting two functions.">ⓘ</a>
+
+
+        <form STYLE= "font-size:25px" class="w3-row" style="text-align:left" action="/paths" method="post">
+            <input STYLE="font-size:20px" align="center" autocomplete="off" autofocus name="seq1" placeholder="Sequence 1" type="text">
+            <input STYLE="font-size:20px" align="center" autocomplete="off" autofocus name="seq2" placeholder="Sequence 2" type="text">
+            <br>
+            <button STYLE= "font-size:25px" class="btn btn-primary" type="submit" class = "smaller" >Analyze</button>
+        </form>
+        </h2>
+
+-->
+    <!--
+        <form  action="/structure" method="post">
+            <h2>Secondary Structure Search
+            <h5> Given a string in dot bracket form, identify all sequences in the last round of selection which are predicted to have that structure.</h5>
+            <p>String of interest (".", "(", ")" only)?</p>
+            <div class="form-group">
+                <input autocomplete="off" autofocus name="ss_emergence" placeholder="Strucutre" type="text" min="1" max="100">
+            </div>
+            <button type="submit">Analyze</button class="btn btn-primary">
+        </form>
+    </h2>
+    -->
+
+  </div>
+</div>
+    </body>
+</html>
