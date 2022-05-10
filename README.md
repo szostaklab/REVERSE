@@ -5,7 +5,7 @@ This is the README document for REVERSE, a one stop-solution for analyzing next 
 
 Version 1.0 Initial Release
 
-Version 1.1 Updated to include run times, the ability to trim by adapter sequence, a sequence logo tool, and more.
+Version 1.1 Updated to include run times, the ability to trim by adapter sequence, a sequence logo tool, and increased the number of possible clusters from 20 to 50.
 
 Version 1.2 Updated to include version information on website and outputted spreadsheets.
 
